@@ -12,6 +12,7 @@ public class Entity : MonoBehaviour
     // AttackPower 외부에서 사용할 수 있게 만들어야합니다.
 
     [SerializeField] private int HealthPoint;
+    [SerializeField] private int MaxHealthPoint;
     [SerializeField] private int AttackPower; // Enemy가 player의 공격력을 직접적으로 변경할 수 있게 되버립니다.
     [SerializeField] Animator animator;
 
@@ -19,15 +20,17 @@ public class Entity : MonoBehaviour
     public bool IsEnemy;
 
     public bool CheckDeath() => IsDeath;
-
     public int GetHP() => HealthPoint; 
-    public void SetHP(int value) => HealthPoint = value;
+    public int GetMaxHP() => MaxHealthPoint;
     public int GetAttackPower() => AttackPower;
+    public void SetHP(int value) => HealthPoint = value;
+    public void SetMaxHP(int value) => MaxHealthPoint = value;
     public void SetAttackPower(int value) => AttackPower = value;
 
     private void Start()
     {
-        IsDeath = false;
+        IsDeath = false;       
+        HealthPoint = MaxHealthPoint;
     }
 
 
