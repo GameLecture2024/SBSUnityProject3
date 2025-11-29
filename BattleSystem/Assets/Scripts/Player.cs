@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public PlayerData playerData;
+
     private int Money;
     public int GetMoney() => Money;
     public int SetMoney(int value) => Money = value;
@@ -11,6 +13,29 @@ public class Player : Entity
     const int HealPrice = 30;
     const int UpgradeHPPrice = 50;
     const int UpgradeAtkPrice = 5;
+    protected override void Start()
+    {
+        base.Start();        
+    }
+
+    public void SavePlayerData()
+    {
+        playerData.MONEY = GetMoney();
+        playerData.HP = GetHP();
+        playerData.ATK = GetAttackPower();
+        SaveSystem.Save(playerData);       
+    }
+
+    // 저장된 데이터를 불러오시겠습니까? Yes -> NO-> 처음 데이터를 시작.
+    public void LoadPlayerData()
+    {
+        // 저장되어 있는 데이터가 있나요? 플레이어의 정보. Player저장. PlayerDataKey 있나요?
+        if (PlayerPrefs.HasKey("PLAYER") == false) return;
+        playerData = SaveSystem.Load();
+        SetMoney(playerData.MONEY);
+        SetHP(playerData.HP);
+        SetAttackPower(playerData.ATK);
+    }
 
     protected override void Dead()
     {

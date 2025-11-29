@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour
     public void SetMaxHP(int value) => MaxHealthPoint = value;
     public void SetAttackPower(int value) => AttackPower = value;
 
-    private void Start()
+    protected virtual void Start()
     {
         IsDeath = false;       
         HealthPoint = MaxHealthPoint;

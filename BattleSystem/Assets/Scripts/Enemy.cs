@@ -5,8 +5,9 @@ public class Enemy : Entity
     public int RewardMoney = 10;
     [SerializeField] Player player;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         player = Object.FindFirstObjectByType<Player>();  
     }
 
